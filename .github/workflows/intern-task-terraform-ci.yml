@@ -31,6 +31,10 @@ jobs:
         working-directory: intern-task-terraform/terraform
         run: terraform fmt -check -recursive
 
+      - name: Initialize
+        working-directory: intern-task-terraform/terraform
+        run: terraform init
+
       - name: Validate
         working-directory: intern-task-terraform/terraform
         run: terraform validate

@@ -20,6 +20,7 @@ jobs:
       AWS_ACCESS_KEY_ID: fake
       AWS_SECRET_ACCESS_KEY: fake
       AWS_DEFAULT_REGION: us-east-1
+      TF_VAR_ssh_allowed_cidr: "203.0.113.10/32"
     steps:
       - uses: actions/checkout@v4
 
@@ -28,10 +29,17 @@ jobs:
           terraform_version: "1.12.0"
 
       - name: Format check
+        working-directory: intern-task-terraform/terraform
         run: terraform fmt -check -recursive
 
+      - name: Initialize
+        working-directory: intern-task-terraform/terraform
+        run: terraform init
+
       - name: Validate
+        working-directory: intern-task-terraform/terraform
         run: terraform validate
 
       - name: Plan
+        working-directory: intern-task-terraform/terraform
         run: terraform plan

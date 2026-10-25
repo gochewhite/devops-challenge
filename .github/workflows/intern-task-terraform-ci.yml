@@ -28,10 +28,13 @@ jobs:
           terraform_version: "1.12.0"
 
       - name: Format check
+        working-directory: intern-task-terraform/terraform
         run: terraform fmt -check -recursive
 
       - name: Validate
+        working-directory: intern-task-terraform/terraform
         run: terraform validate
 
       - name: Plan
+        working-directory: intern-task-terraform/terraform
         run: terraform plan
